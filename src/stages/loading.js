@@ -20,7 +20,7 @@ const PROGRESS_STYLE = {
   height: 30,
   padding: 3,
   borderRadius: 5,
-}
+};
 
 export class Loading extends Scene {
   constructor() {
@@ -28,7 +28,10 @@ export class Loading extends Scene {
   }
 
   preload() {
-    const loadingText = this.add.text(0, 0, MAIN.LOADING, { fill: '#ccc', fontSize: '18px' });
+    const loadingText = this.add.text(0, 0, MAIN.LOADING, {
+      fill: '#ccc',
+      fontSize: '18px',
+    });
 
     // Images
     this.load.image('red-player', redPlayer);
@@ -43,9 +46,11 @@ export class Loading extends Scene {
       this,
       APP_SIZE.WIDTH * 0.5 - APP_SIZE.WIDTH * 0.35 * 0.5,
       APP_SIZE.HEIGHT * 0.5 + 25 - 35,
-      0, 1, 0,
+      0,
+      1,
+      0,
       PROGRESS_STYLE,
-    )
+    );
 
     loadingText.x = APP_SIZE.WIDTH * 0.5 - loadingText.width * 0.5;
     loadingText.y = APP_SIZE.HEIGHT * 0.5 - loadingText.height * 0.5 - 35;

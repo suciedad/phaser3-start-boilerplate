@@ -25,10 +25,7 @@ export class ProgressBar extends GameObjects.Container {
     this._style = style;
     this.value = from;
 
-    this.add([
-      this._bg,
-      this._bar,
-    ]);
+    this.add([this._bg, this._bar]);
 
     this.setValue(value);
     this.setSize(width, height);
