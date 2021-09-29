@@ -3,11 +3,12 @@ import { Scene } from 'phaser';
 import { APP_SIZE } from '../constants/app';
 import { SCENE_KEY } from '../constants/scene-key';
 
+import { MAIN } from '../locales/main';
+
 import redPlayer from '../assets/red-player.png';
 import greenPlayer from '../assets/green-player.png';
 import bluePlayer from '../assets/blue-player.png';
 import yellowPlayer from '../assets/yellow-player.png';
-
 import mainMenuButton from '../assets/main-menu-button-2.png';
 
 import { ProgressBar } from '../components/progress-bar';
@@ -27,16 +28,16 @@ export class Loading extends Scene {
   }
 
   preload() {
-    const loadingText = this.add.text(0, 0, 'TEXT.LOADING', { fill: '#ccc', fontSize: '18px' });
+    const loadingText = this.add.text(0, 0, MAIN.LOADING, { fill: '#ccc', fontSize: '18px' });
 
-    // Players
+    // Images
     this.load.image('red-player', redPlayer);
     this.load.image('green-player', greenPlayer);
     this.load.image('blue-player', bluePlayer);
     this.load.image('yellow-player', yellowPlayer);
-
-    // Buttons
     this.load.image('main-menu-button', mainMenuButton);
+
+    // Sounds
 
     const progressBar = new ProgressBar(
       this,

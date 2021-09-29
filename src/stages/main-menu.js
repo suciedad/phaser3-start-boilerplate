@@ -1,6 +1,7 @@
 import { Scene } from 'phaser';
 import { APP_SIZE } from '../constants/app';
 import { SCENE_KEY } from '../constants/scene-key';
+import { MAIN } from '../locales/main';
 
 const TEXT_STYLE = {
   fill: '#222',
@@ -31,8 +32,8 @@ export class MainMenu extends Scene {
       .setInteractive({ useHandCursor: true })
       .on('pointerdown', () => this.selectLevelHandler());
 
-    const startText = this.add.text(0, APP_SIZE.HEIGHT * 0.5 - 55 - 36, 'TEXT.START', TEXT_STYLE);
-    const selectText = this.add.text(0, APP_SIZE.HEIGHT * 0.5 + 3, 'TEXT.SELECT', TEXT_STYLE);
+    const startText = this.add.text(0, APP_SIZE.HEIGHT * 0.5 - 55 - 36, MAIN.START_GAME, TEXT_STYLE);
+    const selectText = this.add.text(0, APP_SIZE.HEIGHT * 0.5 + 3, MAIN.SELECT_LEVEL, TEXT_STYLE);
 
     startText.x = APP_SIZE.WIDTH * 0.5 - startText.width * 0.5;
     selectText.x = APP_SIZE.WIDTH * 0.5 - selectText.width * 0.5;
