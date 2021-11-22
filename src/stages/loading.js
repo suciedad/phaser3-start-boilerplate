@@ -40,6 +40,7 @@ export class Loading extends Scene {
     this.load.image('yellow-player', yellowPlayer);
     this.load.image('main-menu-button', mainMenuButton);
 
+    // TODO - add samples for audio, font, animations
     // Sounds
 
     const progressBar = new ProgressBar(
