@@ -64,6 +64,6 @@ export class MainMenu extends Scene {
   }
 
   selectLevelHandler() {
-    // this.scene.start(SCENE_KEY.LEVEL_SELECTION);
+    console.log('Select Level!');
   }
 }
