@@ -1,4 +1,5 @@
 import { Scene } from 'phaser';
+import { Button } from '../components/button';
 import { APP_SIZE } from '../constants/app';
 import { SCENE_KEY } from '../constants/scene-key';
 import { MAIN } from '../locales/main';
@@ -24,39 +25,63 @@ export class MainMenu extends Scene {
   preload() {}
 
   create() {
-    this.buttons.start = this.add
-      .sprite(
-        APP_SIZE.WIDTH * 0.5,
-        APP_SIZE.HEIGHT * 0.5 - 55 - 20,
-        'main-menu-button',
-      )
-      .setInteractive({ useHandCursor: true })
-      .on('pointerdown', () => this.startClickHandler());
+    // this.buttons.start = this.add
+    //   .sprite(
+    //     APP_SIZE.WIDTH * 0.5,
+    //     APP_SIZE.HEIGHT * 0.5 - 55 - 20,
+    //     'main-menu-button',
+    //   )
+    //   .setInteractive({ useHandCursor: true })
+    //   .on('pointerdown', () => this.startClickHandler());
 
-    this.buttons.selectLevel = this.add
-      .sprite(
-        APP_SIZE.WIDTH * 0.5,
-        APP_SIZE.HEIGHT * 0.5 + 20,
-        'main-menu-button',
-      )
-      .setInteractive({ useHandCursor: true })
-      .on('pointerdown', () => this.selectLevelHandler());
+    // this.buttons.selectLevel = this.add
+    //   .sprite(
+    //     APP_SIZE.WIDTH * 0.5,
+    //     APP_SIZE.HEIGHT * 0.5 + 20,
+    //     'main-menu-button',
+    //   )
+    //   .setInteractive({ useHandCursor: true })
+    //   .on('pointerdown', () => this.selectLevelHandler());
 
-    const startText = this.add.text(
-      0,
-      APP_SIZE.HEIGHT * 0.5 - 55 - 36,
+    // const startText = this.add.text(
+    //   0,
+    //   APP_SIZE.HEIGHT * 0.5 - 55 - 36,
+    //   MAIN.START_GAME,
+    //   TEXT_STYLE,
+    // );
+    // const selectText = this.add.text(
+    //   0,
+    //   APP_SIZE.HEIGHT * 0.5 + 3,
+    //   MAIN.SELECT_LEVEL,
+    //   TEXT_STYLE,
+    // );
+
+    // startText.x = APP_SIZE.WIDTH * 0.5 - startText.width * 0.5;
+    // selectText.x = APP_SIZE.WIDTH * 0.5 - selectText.width * 0.5;
+
+    this.buttons.start = new Button(
+      this,
+      APP_SIZE.WIDTH * 0.5,
+      APP_SIZE.HEIGHT * 0.5 - 55 - 20,
+      255,
+      70,
       MAIN.START_GAME,
-      TEXT_STYLE,
-    );
-    const selectText = this.add.text(
-      0,
-      APP_SIZE.HEIGHT * 0.5 + 3,
-      MAIN.SELECT_LEVEL,
-      TEXT_STYLE,
+      null,
+      null,
+      this.startClickHandler,
     );
 
-    startText.x = APP_SIZE.WIDTH * 0.5 - startText.width * 0.5;
-    selectText.x = APP_SIZE.WIDTH * 0.5 - selectText.width * 0.5;
+    this.buttons.start = new Button(
+      this,
+      APP_SIZE.WIDTH * 0.5,
+      APP_SIZE.HEIGHT * 0.5 + 20,
+      255,
+      70,
+      MAIN.SELECT_LEVEL,
+      null,
+      null,
+      this.selectLevelHandler,
+    );
   }
 
   startClickHandler() {
