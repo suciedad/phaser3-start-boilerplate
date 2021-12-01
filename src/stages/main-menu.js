@@ -66,8 +66,8 @@ export class MainMenu extends Scene {
       255,
       70,
       MAIN.START_GAME,
-      null,
-      null,
+      TEXT_STYLE,
+      'main-menu-button',
       this.startClickHandler,
     );
 

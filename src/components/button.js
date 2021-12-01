@@ -3,6 +3,11 @@ import { GameObjects } from 'phaser';
 const DEFAULT_BG_COLOR = 0x1976d2;
 const DEFAULT_BG_RADIUS = 5;
 const DEFAULT_TEXTURE_NAME = 'default-button-background';
+const RENDER_BACKGROUND_METHOD = {
+  NINE_SLICE: 'nine-slice',
+  SPRITE: 'sprite',
+  DEFAULT: 'default',
+};
 
 // TODO: research setOrigin
 export class Button extends GameObjects.Container {
@@ -39,15 +44,25 @@ export class Button extends GameObjects.Container {
   }
 
   renderBackgroundMethod() {
-    return this.nineSliceSprite ? 'nine-slice' : 'default';
+    if (typeof this.nineSliceSprite === 'string') {
+      return RENDER_BACKGROUND_METHOD.SPRITE;
+    }
+
+    return this.nineSliceSprite
+      ? RENDER_BACKGROUND_METHOD.NINE_SLICE
+      : RENDER_BACKGROUND_METHOD.DEFAULT;
   }
 
   renderBackground() {
     const method = this.renderBackgroundMethod();
 
     switch (method) {
-      case 'nine-slice':
+      case RENDER_BACKGROUND_METHOD.NINE_SLICE:
         this.renderNineSliceBackground();
+        break;
+
+      case RENDER_BACKGROUND_METHOD.SPRITE:
+        this.renderSpriteBackground();
         break;
 
       default:
@@ -57,6 +72,14 @@ export class Button extends GameObjects.Container {
   }
 
   renderNineSliceBackground() {}
+
+  renderSpriteBackground() {
+    const { scene } = this;
+
+    const renderedBackground = scene.add.sprite(0, 0, this.nineSliceSprite);
+
+    this.add(renderedBackground);
+  }
 
   renderDefaultBackground() {
     const { width, height, scene } = this;
@@ -79,7 +102,7 @@ export class Button extends GameObjects.Container {
   renderText() {
     const { text, scene } = this;
 
-    const renderedText = scene.add.text(0, 0, text).setOrigin(0.5);
+    const renderedText = scene.add.text(0, 0, text, this.style).setOrigin(0.5);
 
     this.add(renderedText);
   }
