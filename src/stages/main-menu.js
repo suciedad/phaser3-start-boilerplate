@@ -71,7 +71,7 @@ export class MainMenu extends Scene {
       this.startClickHandler,
     );
 
-    this.buttons.start = new Button(
+    this.buttons.selectLevel = new Button(
       this,
       APP_SIZE.WIDTH * 0.5,
       APP_SIZE.HEIGHT * 0.5 + 20,
