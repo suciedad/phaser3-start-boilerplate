@@ -11,6 +11,17 @@ import bluePlayer from '../assets/blue-player.png';
 import yellowPlayer from '../assets/yellow-player.png';
 import mainMenuButton from '../assets/main-menu-button-2.png';
 
+// Nine Slice samples
+import topLeft from '../assets/samples/nine-slice/top-left.png';
+import topRight from '../assets/samples/nine-slice/top-right.png';
+import bottomLeft from '../assets/samples/nine-slice/bottom-left.png';
+import bottomRight from '../assets/samples/nine-slice/bottom-right.png';
+import top from '../assets/samples/nine-slice/top.png';
+import bottom from '../assets/samples/nine-slice/bottom.png';
+import left from '../assets/samples/nine-slice/left.png';
+import right from '../assets/samples/nine-slice/right.png';
+import bg from '../assets/samples/nine-slice/bg.png';
+
 import { ProgressBar } from '../components/progress-bar';
 
 const PROGRESS_STYLE = {
@@ -39,6 +50,17 @@ export class Loading extends Scene {
     this.load.image('blue-player', bluePlayer);
     this.load.image('yellow-player', yellowPlayer);
     this.load.image('main-menu-button', mainMenuButton);
+
+    // Nine Slice samples
+    this.load.image('top-left', topLeft);
+    this.load.image('top-right', topRight);
+    this.load.image('bottom-left', bottomLeft);
+    this.load.image('bottom-right', bottomRight);
+    this.load.image('top', top);
+    this.load.image('bottom', bottom);
+    this.load.image('left', left);
+    this.load.image('right', right);
+    this.load.image('bg', bg);
 
     // TODO - add samples for audio, font, animations
     // Sounds

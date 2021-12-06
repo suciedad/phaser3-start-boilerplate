@@ -1,5 +1,6 @@
 import { Scene } from 'phaser';
 import { Button } from '../components/button';
+import { NineSlice } from '../components/nine-slice';
 import { APP_SIZE } from '../constants/app';
 import { SCENE_KEY } from '../constants/scene-key';
 import { MAIN } from '../locales/main';
@@ -25,6 +26,18 @@ export class MainMenu extends Scene {
   preload() {}
 
   create() {
+    const testNineSlice = new NineSlice(this, 300, 300, 300, 200, {
+      topLeft: 'top-left',
+      topRight: 'top-right',
+      bottomLeft: 'bottom-left',
+      bottomRight: 'bottom-right',
+      top: 'top',
+      bottom: 'bottom',
+      left: 'left',
+      right: 'right',
+      bg: 'bg',
+    });
+
     // this.buttons.start = this.add
     //   .sprite(
     //     APP_SIZE.WIDTH * 0.5,
