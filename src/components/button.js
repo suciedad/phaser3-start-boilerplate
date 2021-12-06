@@ -1,4 +1,5 @@
 import { GameObjects } from 'phaser';
+import { NineSlice } from './nine-slice';
 
 const DEFAULT_BG_COLOR = 0x1976d2;
 const DEFAULT_BG_RADIUS = 5;
@@ -10,18 +11,9 @@ const RENDER_BACKGROUND_METHOD = {
 };
 
 // TODO: research setOrigin
+// TODO: add offset options for text
 export class Button extends GameObjects.Container {
-  constructor(
-    scene,
-    x,
-    y,
-    width,
-    height,
-    text,
-    style,
-    nineSliceSprite,
-    onClick,
-  ) {
+  constructor(scene, x, y, width, height, text, style, background, onClick) {
     super(scene, x, y);
 
     this.scene = scene;
@@ -31,7 +23,7 @@ export class Button extends GameObjects.Container {
     this.height = height;
     this.text = text;
     this.style = style;
-    this.nineSliceSprite = nineSliceSprite;
+    this.background = background;
     this.onClick = onClick;
 
     this.renderBackground();
@@ -44,11 +36,11 @@ export class Button extends GameObjects.Container {
   }
 
   renderBackgroundMethod() {
-    if (typeof this.nineSliceSprite === 'string') {
+    if (typeof this.background === 'string') {
       return RENDER_BACKGROUND_METHOD.SPRITE;
     }
 
-    return this.nineSliceSprite
+    return this.background
       ? RENDER_BACKGROUND_METHOD.NINE_SLICE
       : RENDER_BACKGROUND_METHOD.DEFAULT;
   }
@@ -71,12 +63,25 @@ export class Button extends GameObjects.Container {
     }
   }
 
-  renderNineSliceBackground() {}
+  renderNineSliceBackground() {
+    const { scene, background: nineSliceSprite, width, height } = this;
+
+    const renderedBackground = new NineSlice(
+      scene,
+      0,
+      0,
+      width,
+      height,
+      nineSliceSprite,
+    );
+
+    this.add(renderedBackground);
+  }
 
   renderSpriteBackground() {
     const { scene } = this;
 
-    const renderedBackground = scene.add.sprite(0, 0, this.nineSliceSprite);
+    const renderedBackground = scene.add.sprite(0, 0, this.background);
 
     this.add(renderedBackground);
   }

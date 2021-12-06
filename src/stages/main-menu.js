@@ -1,6 +1,5 @@
 import { Scene } from 'phaser';
 import { Button } from '../components/button';
-import { NineSlice } from '../components/nine-slice';
 import { APP_SIZE } from '../constants/app';
 import { SCENE_KEY } from '../constants/scene-key';
 import { MAIN } from '../locales/main';
@@ -17,7 +16,7 @@ export class MainMenu extends Scene {
     this.buttons = {
       start: null,
       selectLevel: null,
-      protocol: null,
+      options: null,
     };
 
     this.logo = null;
@@ -26,7 +25,7 @@ export class MainMenu extends Scene {
   preload() {}
 
   create() {
-    const testNineSlice = new NineSlice(this, 300, 300, 300, 200, {
+    const nineSliceSprites = {
       topLeft: 'top-left',
       topRight: 'top-right',
       bottomLeft: 'bottom-left',
@@ -36,41 +35,7 @@ export class MainMenu extends Scene {
       left: 'left',
       right: 'right',
       bg: 'bg',
-    });
-
-    // this.buttons.start = this.add
-    //   .sprite(
-    //     APP_SIZE.WIDTH * 0.5,
-    //     APP_SIZE.HEIGHT * 0.5 - 55 - 20,
-    //     'main-menu-button',
-    //   )
-    //   .setInteractive({ useHandCursor: true })
-    //   .on('pointerdown', () => this.startClickHandler());
-
-    // this.buttons.selectLevel = this.add
-    //   .sprite(
-    //     APP_SIZE.WIDTH * 0.5,
-    //     APP_SIZE.HEIGHT * 0.5 + 20,
-    //     'main-menu-button',
-    //   )
-    //   .setInteractive({ useHandCursor: true })
-    //   .on('pointerdown', () => this.selectLevelHandler());
-
-    // const startText = this.add.text(
-    //   0,
-    //   APP_SIZE.HEIGHT * 0.5 - 55 - 36,
-    //   MAIN.START_GAME,
-    //   TEXT_STYLE,
-    // );
-    // const selectText = this.add.text(
-    //   0,
-    //   APP_SIZE.HEIGHT * 0.5 + 3,
-    //   MAIN.SELECT_LEVEL,
-    //   TEXT_STYLE,
-    // );
-
-    // startText.x = APP_SIZE.WIDTH * 0.5 - startText.width * 0.5;
-    // selectText.x = APP_SIZE.WIDTH * 0.5 - selectText.width * 0.5;
+    };
 
     this.buttons.start = new Button(
       this,
@@ -91,9 +56,27 @@ export class MainMenu extends Scene {
       255,
       70,
       MAIN.SELECT_LEVEL,
-      null,
-      null,
+      {
+        fontSize: 22,
+        fill: '#fff',
+        fontFamily: 'Arial',
+        stroke: '#29366f',
+        strokeThickness: 8,
+      },
+      nineSliceSprites,
       this.selectLevelHandler,
+    );
+
+    this.buttons.selectLevel = new Button(
+      this,
+      APP_SIZE.WIDTH * 0.5,
+      APP_SIZE.HEIGHT * 0.5 + 20 + 70 + 30,
+      255,
+      70,
+      MAIN.OPTIONS,
+      null,
+      null,
+      this.optionsClickHandler,
     );
   }
 
@@ -103,5 +86,9 @@ export class MainMenu extends Scene {
 
   selectLevelHandler() {
     console.log('Select Level!');
+  }
+
+  optionsClickHandler() {
+    console.log('Open Options!');
   }
 }
