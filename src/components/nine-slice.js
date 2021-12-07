@@ -1,6 +1,5 @@
 import { GameObjects, Display } from 'phaser';
 
-// TODO: fix positions micro gaps
 export class NineSlice extends GameObjects.Container {
   constructor(scene, x, y, width, height, sprites) {
     super(scene, x, y);

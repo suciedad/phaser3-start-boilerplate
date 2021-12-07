@@ -1,4 +1,4 @@
-import { Scene } from 'phaser';
+import { Actions, Scene } from 'phaser';
 import { Button } from '../components/button';
 import { APP_SIZE } from '../constants/app';
 import { SCENE_KEY } from '../constants/scene-key';
@@ -45,8 +45,8 @@ export class MainMenu extends Scene {
 
     this.buttons.start = new Button(
       this,
-      APP_SIZE.WIDTH * 0.5,
-      APP_SIZE.HEIGHT * 0.5 - 55 - 20,
+      0,
+      0,
       BUTTON_SIZE.WIDTH,
       BUTTON_SIZE.HEIGHT,
       MAIN.START_GAME.toUpperCase(),
@@ -57,8 +57,8 @@ export class MainMenu extends Scene {
 
     this.buttons.selectLevel = new Button(
       this,
-      APP_SIZE.WIDTH * 0.5,
-      APP_SIZE.HEIGHT * 0.5 + 20,
+      0,
+      0,
       BUTTON_SIZE.WIDTH,
       BUTTON_SIZE.HEIGHT,
       MAIN.SELECT_LEVEL,
@@ -73,16 +73,27 @@ export class MainMenu extends Scene {
       this.selectLevelHandler,
     );
 
-    this.buttons.selectLevel = new Button(
+    this.buttons.options = new Button(
       this,
-      APP_SIZE.WIDTH * 0.5,
-      APP_SIZE.HEIGHT * 0.5 + 20 + 70 + 30,
+      0,
+      0,
       BUTTON_SIZE.WIDTH,
       BUTTON_SIZE.HEIGHT,
       MAIN.OPTIONS,
       null,
       null,
       this.optionsClickHandler,
+    );
+
+    Actions.GridAlign(
+      [this.buttons.start, this.buttons.selectLevel, this.buttons.options],
+      {
+        x: APP_SIZE.WIDTH * 0.5,
+        y: 300,
+        height: -1,
+        cellHeight: BUTTON_SIZE.HEIGHT + 40,
+        position: 6,
+      },
     );
   }
 
