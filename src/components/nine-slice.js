@@ -91,13 +91,12 @@ export class NineSlice extends GameObjects.Container {
     const offsetX = this.topLeftSprite.width;
     const offsetY = this.topLeftSprite.height;
 
-    this.bg = this.scene.add.tileSprite(
-      0,
-      0,
-      width - offsetX * 2,
-      height - offsetY * 2,
-      bg,
-    );
+    const bgWidth =
+      width - offsetX * 2 + (Number.isInteger(this.left.x) ? 0 : 1);
+    const bgHeight =
+      height - offsetY * 2 + (Number.isInteger(this.top.y) ? 0 : 1);
+
+    this.bg = this.scene.add.tileSprite(0, 0, bgWidth, bgHeight, bg);
 
     this.add(this.bg);
 

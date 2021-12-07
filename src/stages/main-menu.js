@@ -5,8 +5,14 @@ import { SCENE_KEY } from '../constants/scene-key';
 import { MAIN } from '../locales/main';
 
 const TEXT_STYLE = {
-  fill: '#222',
-  fontSize: '24px',
+  fill: '#380e00',
+  fontSize: '18px',
+  fontFamily: "'Press Start 2P', cursive",
+};
+
+const BUTTON_SIZE = {
+  WIDTH: 255,
+  HEIGHT: 70,
 };
 
 export class MainMenu extends Scene {
@@ -41,9 +47,9 @@ export class MainMenu extends Scene {
       this,
       APP_SIZE.WIDTH * 0.5,
       APP_SIZE.HEIGHT * 0.5 - 55 - 20,
-      255,
-      70,
-      MAIN.START_GAME,
+      BUTTON_SIZE.WIDTH,
+      BUTTON_SIZE.HEIGHT,
+      MAIN.START_GAME.toUpperCase(),
       TEXT_STYLE,
       'main-menu-button',
       this.startClickHandler,
@@ -53,8 +59,8 @@ export class MainMenu extends Scene {
       this,
       APP_SIZE.WIDTH * 0.5,
       APP_SIZE.HEIGHT * 0.5 + 20,
-      255,
-      70,
+      BUTTON_SIZE.WIDTH,
+      BUTTON_SIZE.HEIGHT,
       MAIN.SELECT_LEVEL,
       {
         fontSize: 22,
@@ -71,8 +77,8 @@ export class MainMenu extends Scene {
       this,
       APP_SIZE.WIDTH * 0.5,
       APP_SIZE.HEIGHT * 0.5 + 20 + 70 + 30,
-      255,
-      70,
+      BUTTON_SIZE.WIDTH,
+      BUTTON_SIZE.HEIGHT,
       MAIN.OPTIONS,
       null,
       null,
