@@ -5,13 +5,14 @@ import {
   APP_CONTAINER_ID,
   APP_SIZE,
 } from './constants/app';
-import { addDatGui } from './utils/dat-gui';
+import { addDatGui, addFPSMeter } from './utils';
 
 import { Loading } from './stages/loading';
 import { MainMenu } from './stages/main-menu';
 import { DemoGameScene } from './stages/demo-game-scene';
 
 addDatGui();
+addFPSMeter();
 
 const GAME_SETTINGS = {
   width: APP_SIZE.WIDTH,
