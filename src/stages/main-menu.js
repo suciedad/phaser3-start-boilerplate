@@ -52,7 +52,7 @@ export class MainMenu extends Scene {
       MAIN.START_GAME.toUpperCase(),
       TEXT_STYLE,
       'main-menu-button',
-      this.startClickHandler,
+      this.startClickHandler.bind(this),
     );
 
     this.buttons.selectLevel = new Button(
@@ -99,6 +99,7 @@ export class MainMenu extends Scene {
 
   startClickHandler() {
     console.log('Start Game!');
+    this.scene.start(SCENE_KEY.DEMO_GAME_SCENE);
   }
 
   selectLevelHandler() {
