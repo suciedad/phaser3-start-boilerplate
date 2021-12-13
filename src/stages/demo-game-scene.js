@@ -21,10 +21,16 @@ export class DemoGameScene extends Scene {
     this.downKey = this.input.keyboard.addKey('DOWN');
     this.leftKey = this.input.keyboard.addKey('LEFT');
     this.rightKey = this.input.keyboard.addKey('RIGHT');
+
+    this.pointer = this.input.activePointer;
   }
 
   update() {
     this.player.setVelocity(0);
+
+    if (this.pointer.isDown) {
+      this.movePlayerByPointer();
+    }
 
     if (this.leftKey.isDown) {
       this.player.setVelocityX(-PLAYER.VELOCITY_X);
@@ -43,5 +49,15 @@ export class DemoGameScene extends Scene {
     if (this.downKey.isDown) {
       this.player.setVelocityY(PLAYER.VELOCITY_Y);
     }
+  }
+
+  movePlayerByPointer() {
+    this.physics.moveToObject(
+      this.player,
+      this.pointer,
+      PLAYER.VELOCITY_POINTER,
+    );
+
+    this.player.flipX = this.player.body.velocity.x < 0;
   }
 }

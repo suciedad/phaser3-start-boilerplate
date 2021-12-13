@@ -12,7 +12,7 @@ import { MainMenu } from './stages/main-menu';
 import { DemoGameScene } from './stages/demo-game-scene';
 
 addDatGui();
-addFPSMeter();
+// addFPSMeter();
 
 const GAME_SETTINGS = {
   width: APP_SIZE.WIDTH,
@@ -22,6 +22,9 @@ const GAME_SETTINGS = {
   scene: [Loading, MainMenu, DemoGameScene],
   physics: {
     default: 'arcade',
+    arcade: {
+      debug: false,
+    },
   },
 };
 
