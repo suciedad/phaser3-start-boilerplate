@@ -32,7 +32,7 @@ export class Button extends GameObjects.Container {
     this.scene.add.existing(this);
 
     this.setInteractive({ useHandCursor: true });
-    this.on('pointerdown', () => this.onClick());
+    this.on('pointerdown', () => this.onClick && this.onClick());
   }
 
   renderBackgroundMethod() {

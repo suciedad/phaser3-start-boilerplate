@@ -1,5 +1,6 @@
 import { Actions, Scene } from 'phaser';
 import { Button } from '../components/button';
+import { PLACEMENT, Tooltip } from '../components/tooltip';
 import { APP_SIZE } from '../constants/app';
 import { SCENE_KEY } from '../constants/scene-key';
 import { MAIN } from '../locales/main';
@@ -83,6 +84,18 @@ export class MainMenu extends Scene {
       null,
       null,
       this.optionsClickHandler,
+    );
+
+    this.popoverButton = new Button(this, 150, 100, 100, 40, 'HOVER ME');
+
+    this.popover = new Tooltip(
+      this,
+      this.popoverButton,
+      150,
+      70,
+      nineSliceSprites,
+      PLACEMENT.BOTTOM_LEFT,
+      20,
     );
 
     Actions.GridAlign(
