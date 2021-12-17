@@ -19,6 +19,9 @@ export const PLACEMENT = {
   RIGHT_BOTTOM: 'right-bottom',
 };
 
+// TODO: add fadein/fadeout animation
+// TODO: add follow pointer
+// TODO: add default bg
 export class Tooltip extends GameObjects.Container {
   constructor(scene, parent, width, height, sprites, placement, offset) {
     super(scene);
@@ -31,24 +34,37 @@ export class Tooltip extends GameObjects.Container {
 
     const { x, y } = this.getTooltipPosition(placement);
 
-    this.bg = new NineSlice(scene, x, y, width, height, sprites);
+    this.bg = new NineSlice(scene, 0, 0, width, height, sprites);
+
+    this.setPosition(x, y);
 
     this.add(this.bg);
 
     this.scene.add.existing(this);
 
-    this.hideTooltip();
+    this.setAlpha(0);
 
-    this.parent.on('pointerover', this.showTooltip.bind(this));
-    this.parent.on('pointerout', this.hideTooltip.bind(this));
+    this.parent.on('pointerover', () => this.showTooltip());
+    this.parent.on('pointerout', () => this.hideTooltip());
+    this.on('pointerdown', () => console.log('click clack'));
   }
 
   showTooltip() {
-    this.setVisible(true);
+    this.scene.tweens.add({
+      targets: this,
+      ease: 'Sine.easeIn',
+      duration: 200,
+      alpha: { value: 1 },
+    });
   }
 
   hideTooltip() {
-    this.setVisible(false);
+    this.scene.tweens.add({
+      targets: this,
+      ease: 'Sine.easeOut',
+      duration: 200,
+      alpha: { value: 0 },
+    });
   }
 
   getTooltipPosition(placement) {

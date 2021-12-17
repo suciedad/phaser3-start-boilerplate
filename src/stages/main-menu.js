@@ -1,5 +1,6 @@
 import { Actions, Scene } from 'phaser';
 import { Button } from '../components/button';
+import { DragAndDropGrid } from '../components/drag-and-drop-grid';
 import { PLACEMENT, Tooltip } from '../components/tooltip';
 import { APP_SIZE } from '../constants/app';
 import { SCENE_KEY } from '../constants/scene-key';
@@ -86,16 +87,81 @@ export class MainMenu extends Scene {
       this.optionsClickHandler,
     );
 
-    this.popoverButton = new Button(this, 150, 100, 100, 40, 'HOVER ME');
-
-    this.popover = new Tooltip(
+    this.tooltipButton = new Button(
       this,
-      this.popoverButton,
+      APP_SIZE.WIDTH - 250,
+      APP_SIZE.HEIGHT - 200,
+      100,
+      40,
+      MAIN.TOOLTIP_BUTTON_TEXT,
+    );
+
+    this.bottomTooltip = new Tooltip(
+      this,
+      this.tooltipButton,
       150,
       70,
       nineSliceSprites,
       PLACEMENT.BOTTOM_LEFT,
       20,
+    );
+
+    this.rightTooltip = new Tooltip(
+      this,
+      this.tooltipButton,
+      100,
+      100,
+      nineSliceSprites,
+      PLACEMENT.RIGHT_BOTTOM,
+      30,
+    );
+
+    this.topTooltip = new Tooltip(
+      this,
+      this.tooltipButton,
+      30,
+      50,
+      nineSliceSprites,
+      PLACEMENT.TOP_CENTER,
+    );
+
+    this.input.setDraggable(this.tooltipButton);
+    this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+      gameObject.x = dragX;
+      gameObject.y = dragY;
+    });
+
+    this.goodItems = [];
+    this.badItems = [];
+
+    for (let i = 0; i < 2; i += 1) {
+      const item = this.createTestDragItem(40, true, 0x0000ff);
+
+      this.input.setDraggable(item);
+      this.goodItems.push(item);
+    }
+
+    for (let i = 0; i < 2; i += 1) {
+      const item = this.createTestDragItem(40, true, 0xff0000);
+
+      this.input.setDraggable(item);
+      this.badItems.push(item);
+    }
+
+    Actions.GridAlign([...this.goodItems, ...this.badItems], {
+      cellWidth: 35 + 10,
+      cellHeight: 35 + 10,
+      x: 50,
+      y: 50,
+      position: 6,
+      width: -1,
+    });
+
+    this.topDragGrid = new DragAndDropGrid(this, 150, 150, 40, 5).setItems(
+      this.goodItems,
+    );
+    this.bottomDragGrid = new DragAndDropGrid(this, 150, 215, 40, 5).setItems(
+      this.badItems,
     );
 
     Actions.GridAlign(
@@ -121,5 +187,22 @@ export class MainMenu extends Scene {
 
   optionsClickHandler() {
     console.log('Open Options!');
+  }
+
+  createTestDragItem(size, interactive, color) {
+    const spriteName = 'test-dnd-item' + Math.random();
+
+    this.add
+      .graphics()
+      .fillStyle(color, 1)
+      .fillRect(0, 0, size, size)
+      .generateTexture(spriteName, size, size)
+      .destroy();
+
+    const item = this.add.image(0, 0, spriteName);
+
+    interactive && item.setInteractive({ useHandCursor: true });
+
+    return item;
   }
 }

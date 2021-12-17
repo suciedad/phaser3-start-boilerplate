@@ -3,4 +3,5 @@ export const MAIN = {
   START_GAME: 'Start game',
   SELECT_LEVEL: 'Select level',
   OPTIONS: 'Options',
+  TOOLTIP_BUTTON_TEXT: 'HOVER ME',
 };
