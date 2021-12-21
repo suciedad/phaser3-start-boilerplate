@@ -1,8 +1,10 @@
-import { Scene } from 'phaser';
+import { GameObjects, Scene } from 'phaser';
 
 import { APP_SIZE } from '../constants/app';
 import { PLAYER } from '../constants/game';
 import { SCENE_KEY } from '../constants/scene-key';
+import { HpMixin, RewardMixin, composeMixins } from '../mixins';
+import { HP_EVENTS } from '../mixins/hp-mixin';
 
 export class DemoGameScene extends Scene {
   constructor() {
@@ -23,6 +25,24 @@ export class DemoGameScene extends Scene {
     this.rightKey = this.input.keyboard.addKey('RIGHT');
 
     this.pointer = this.input.activePointer;
+
+    const RewardableHpHero = composeMixins(
+      HpMixin(100, 75),
+      RewardMixin({ shards: 7 }),
+    )(GameObjects.Image);
+    const hero = new RewardableHpHero(this, 100, 500, 'yellow-player');
+    hero.on(HP_EVENTS.TAKE_DAMAGE, ({ damage, currentHp }) =>
+      console.log(`Recieve ${damage} damage. Now ${currentHp} HP.`),
+    );
+    hero.on(HP_EVENTS.KILLED, ({ damage }) => {
+      console.log(`Recieve ${damage} damage. Killed :(`);
+      console.log(`Someone take ${hero.getReward().shards} shards from you!`);
+    });
+    hero.takeDamage(30);
+    hero.takeDamage(30);
+    hero.takeDamage(30);
+    hero.takeDamage(30);
+    this.add.existing(hero);
   }
 
   update() {
